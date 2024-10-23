@@ -1,4 +1,6 @@
 ---
+import Footer from '@Components/Footer.astro';
+import Header from '@Components/Header.astro';
 import '@fontsource-variable/heebo';
 interface Props {
 	title: string;
@@ -17,6 +19,8 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="font-heebo">
+	   <Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
