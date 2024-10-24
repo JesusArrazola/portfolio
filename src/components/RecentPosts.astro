@@ -1,15 +1,26 @@
 ---
 import PostCard from "./PostCard.astro"
+import {getCollection, getEntry} from "astro:content";
+import type CollectionEntry from 'astro:content';
+
+const allBlogs = await getCollection('blog');
+
+console.log(allBlogs);
 ---
 
-<section class="bg-[#EDF7FA] px-3 py-6 sm:px-20 lg:px-32">
+<section class="bg-[#EDF7FA] px-3 py-6 sm:px-20 lg:px-64">
     <div class="w-full flex items-baseline justify-center sm:justify-between mb-14">
-        <h3 class="text-xl text-center">Recent Posts</h3>
-        <a href="#" class="hidden sm:inline text-secondary hover:underline">View all</a>
+        <h3 class="text-xl text-center">Publicaciones recientes</h3>
+        <a href="#" class="hidden sm:inline text-secondary hover:underline">Ver todo</a>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-4">
-        <PostCard />
-        <PostCard />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {
+
+          allBlogs.map(blog => {
+            return <PostCard post={blog}/>
+          })
+
+        }
     </div>
 </section>

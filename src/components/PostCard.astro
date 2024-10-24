@@ -1,11 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const date = new Date(post.data.date);
+const options = { day: 'numeric', month: 'short', year: 'numeric' };
+const formattedDate = date.toLocaleDateString('es-ES', options);
+---
+
 <article class="bg-white flex flex-col gap-3 items-start text-left py-8 px-6 mb-4">
     <h2 class="font-bold text-2xl">
-        Making a design system from scratch
+        { post.data.title }
     </h2>
     <div class="font-light">
-        12 Feb 2024 | <span class="text-light">Design, Pattern</span>
+        {formattedDate} | <span class="text-light">{ post.data.tags.map((tag,index) => {
+          if(index + 1 === post.data.tags.length)
+            return tag
+          else
+            return `${tag}, `
+        }) }</span>
     </div>
     <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dolorum accusamus inventore debitis neque saepe consequatur voluptas deleniti. Atque, aspernatur.
+        {post.data.extract}
     </p>
 </article>
