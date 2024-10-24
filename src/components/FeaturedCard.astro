@@ -1,6 +1,11 @@
+---
+import Image from "astro/components/Image.astro";
+import myImage from '@Public/imgs/works/wt-2.png';
+---
+
 <article class="flex flex-col sm:flex-row gap-5 border-light border-b mb-14">
     <div>
-        <img src="/imgs/works/work-thumbnail.png" class="sm:max-w-48 rounded-lg" alt="Work thumbnail">
+        <Image src={myImage} class={"sm:max-w-48 rounded-lg"} alt="Work thumbnail" />
     </div>
     <div class="flex flex-col gap-5">
         <h3 class="font-bold text-2xl">

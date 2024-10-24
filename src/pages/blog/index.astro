@@ -1,0 +1,20 @@
+---
+import PostCard from "@Components/PostCard.astro";
+import Layout from "@Layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allBlogs = await getCollection('blog');
+---
+
+<Layout title="Blog - Jesús Arrazola | Desarrollador web">
+    <div class="px-3 py-6 sm:px-20 lg:px-64">
+        <a href="/" class="text-primary underline px-6">&leftarrow; Volver al inicio</a>
+        {
+
+            allBlogs.map(blog => {
+              return <PostCard post={blog}/>
+            })
+    
+        }
+    </div>
+</Layout>

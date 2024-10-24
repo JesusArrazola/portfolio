@@ -1,16 +1,23 @@
 <header class="h-12 p-6 flex items-center justify-end text-dark sm:px-20 lg:px-64 sm:py-10">
-    <svg class="cursor-pointer sm:hidden" xmlns="http://www.w3.org/2000/svg" x-bind:width="size" x-bind:height="size" viewBox="0 0 24 24" fill="none" stroke="currentColor" x-bind:stroke-width="stroke" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+    <svg id="menu-btn" class="cursor-pointer sm:hidden" xmlns="http://www.w3.org/2000/svg" x-bind:width="size" x-bind:height="size" viewBox="0 0 24 24" fill="none" stroke="currentColor" x-bind:stroke-width="stroke" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
         <path d="M4 6l16 0"></path>
         <path d="M4 12l16 0"></path>
         <path d="M4 18l16 0"></path>
     </svg>
 
-    <nav class="hidden sm:block">
-    <ul class="flex gap-8 items-center justify-end text-xl">
+    <nav id='nav' class="hidden bg-white rounded-lg shadow-lg sm:shadow-none px-6 py-3 fixed top-12 right-4 sm:relative sm:block sm:p-0">
+    <ul class="flex flex-col sm:flex-row gap-8 items-end sm:items-center justify-end text-xl">
         <li><a href="#" class="hover:text-primary">Portafolio </a></li>
-        <li><a href="#" class="hover:text-primary">Blog</a></li>
+        <li><a href="/blog" class="hover:text-primary">Blog</a></li>
         <li><a href="#" class="hover:text-primary">Contacto</a></li>
     </ul>
     </nav>
-
 </header>
+<script>
+    const menuBtn = document.querySelector('#menu-btn');
+    const nav = document.querySelector('#nav');
+
+    menuBtn?.addEventListener('click',()=>{
+        nav?.classList.toggle('hidden');
+    })
+</script>
