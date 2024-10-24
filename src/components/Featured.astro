@@ -1,10 +1,20 @@
 ---
 import FeaturedCard from "./FeaturedCard.astro";
+const { class_ } = Astro.props;
 ---
 
-<section class="px-3 py-6 flex flex-col gap-4 items-center justify-center mb-32">
-    <h2 class="text-lg">
-        Trabajo destacado
-    </h2>
-    <FeaturedCard />
+<section class="px-3 py-6 sm:px-20 lg:px-32 mb-32">
+
+    <div class:list={["flex flex-col gap-14 items-center justify-center sm:items-start",class_]}>
+        <h2 class="text-xl">
+            Trabajo destacado
+        </h2>
+
+        <div>
+            <FeaturedCard />
+            <FeaturedCard class_="hidden sm:block"/>
+            <FeaturedCard class_="hidden sm:block"/>
+        </div>
+    </div>
+
 </section>
