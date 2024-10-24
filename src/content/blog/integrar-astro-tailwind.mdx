@@ -2,8 +2,89 @@
 title: ¿Cómo integrar Tailwind CSS en Astro?
 date: 2024-10-23
 tags: ["Desarrollo","Astro"]
+readtime: 10
 extract: "Astro es un generador de sitios estáticos que permite construir proyectos web con un rendimiento excepcional. Si quieres darle un toque moderno y estilizado a tu proyecto, integrar Tailwind CSS es una excelente opción. "
 ---
-# Hola mundo
+Astro es un generador de sitios estáticos que permite crear aplicaciones web rápidas y optimizadas. Si deseas agregar un diseño atractivo a tu proyecto, Tailwind CSS es una excelente opción. A continuación, te mostramos cómo integrar Tailwind CSS con Astro de manera sencilla.
 
-Hola perrros!
+### Paso 1: Crear un nuevo proyecto de Astro
+
+Si aún no tienes un proyecto de Astro, comienza por crear uno. Abre tu terminal y ejecuta:
+
+```bash
+npm create astro@latest
+```
+
+Sigue las instrucciones para configurar tu nuevo proyecto.
+
+### Paso 2: Instalar Tailwind CSS
+
+Una vez que tu proyecto esté listo, navega a la carpeta del proyecto y agrega Tailwind CSS junto con sus dependencias:
+
+```bash
+cd tu-proyecto
+npm install tailwindcss postcss autoprefixer
+```
+
+Luego, inicializa Tailwind CSS:
+
+```bash
+npx tailwindcss init -p
+```
+
+Esto creará dos archivos: `tailwind.config.js` y `postcss.config.js`.
+
+### Paso 3: Configurar Tailwind CSS
+
+Abre el archivo `tailwind.config.js` y configura el `content` para que Tailwind pueda purgar el CSS no utilizado en producción. Debe verse así:
+
+```javascript
+module.exports = {
+  content: [
+    "./src/**/*.{astro,html,js,svelte,vue}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+### Paso 4: Crear el archivo CSS
+
+Crea un nuevo archivo CSS en la carpeta `src/styles` llamado `global.css` y agrega las siguientes líneas:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Paso 5: Importar el archivo CSS
+
+Ahora, importa el archivo CSS en tu proyecto. Abre el archivo `src/layouts/BaseLayout.astro` (o el que estés usando) y añade la importación:
+
+```astro
+---
+import '../styles/global.css';
+---
+
+<html>
+  <head>
+    <title>Mi Proyecto Astro</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+### Paso 6: Comprobar la configuración
+
+Finalmente, asegúrate de que todo esté funcionando ejecutando tu proyecto:
+
+```bash
+npm run dev
+```
+
+Visita `http://localhost:3000` y verifica que Tailwind CSS esté aplicado. Puedes comenzar a usar las clases de Tailwind en tus componentes de Astro.

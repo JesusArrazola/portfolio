@@ -7,14 +7,14 @@ interface Props {
 
 const { post } = Astro.props;
 const date = new Date(post.data.date);
-const options = { day: 'numeric', month: 'short', year: 'numeric' };
+const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
 const formattedDate = date.toLocaleDateString('es-ES', options);
 ---
 
 <article class="bg-white flex flex-col gap-3 items-start text-left py-8 px-6 mb-4">
-    <h2 class="font-bold text-2xl">
+    <a href={ `/blog/${post.slug}` } class="font-bold text-2xl hover:text-primary hover:underline cursor-pointer">
         { post.data.title }
-    </h2>
+    </a>
     <div class="font-light">
         {formattedDate} | <span class="text-light">{ post.data.tags.map((tag,index) => {
           if(index + 1 === post.data.tags.length)

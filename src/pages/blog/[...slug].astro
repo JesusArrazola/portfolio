@@ -1,0 +1,40 @@
+---
+import EntryLayout from '@Layouts/EntryLayout.astro';
+import { getCollection } from 'astro:content';
+// 1. Genera una nueva ruta para cada entrada de colección
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+// 2. Para tu plantilla, puedes obtener la entrada directamente de la prop
+const { entry } = Astro.props;
+const data = entry.data;
+const { Content } = await entry.render();
+
+const date = new Date(data.date);
+const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+const fd = date.toLocaleDateString('es-ES', options);
+---
+<EntryLayout title={data.title}>
+    <div class="flex items-center gap-4 h-12">
+      { data.tags.map(tag => <span class="bg-primary px-2 py-1 text-white rounded-md"> {tag} </span>) }
+      
+      <span> | </span>
+
+      <div class="flex items-center gap-2">
+
+        <svg xmlns="http://www.w3.org/2000/svg" x-bind:width="size" x-bind:height="size" viewBox="0 0 24 24" fill="none" stroke="currentColor" x-bind:stroke-width="stroke" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" stroke-width="2">
+          <path d="M6.5 17h11"></path>
+          <path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"></path>
+          <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"></path>
+        </svg>
+
+        <p class="text-base">{data.readtime} minutos</p>
+
+      </div>
+
+    </div>
+    <Content />
+</EntryLayout>

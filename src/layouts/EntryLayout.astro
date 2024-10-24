@@ -1,0 +1,30 @@
+---
+import Footer from '@Components/Footer.astro';
+import Header from '@Components/Header.astro';
+import '@fontsource-variable/heebo';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Desarrollador web freelance en pachuca de soto" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body class="font-heebo">
+	   <Header />
+        <div class="p-6 mx-auto prose lg:prose-lg my-14">
+            <h1 class="text-4xl" >{title}</h1>
+		    <slot />
+            <a class="underline text-primary" href="/">&LeftArrow; Volver al inicio</a>
+        </div>
+		<Footer />
+	</body>
+</html>

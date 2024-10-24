@@ -2,8 +2,82 @@
 title: "Componentes Reutilizables en Astro con Tailwind CSS"
 date: 2024-10-23
 tags: ["Desarrollo","Astro"]
-extract: "Un tutorial sobre cómo crear y utilizar componentes reutilizables con Tailwind, facilitando el mantenimiento y la escalabilidad de tu proyecto."
+readtime: 5
+extract: "Astro es un framework innovador que permite construir sitios web rápidos y eficientes. Uno de sus principales beneficios es la capacidad de crear componentes..."
+---
+Astro es un framework innovador que permite construir sitios web rápidos y eficientes. Uno de sus principales beneficios es la capacidad de crear componentes reutilizables que mejoran la mantenibilidad y la consistencia de tu proyecto. Al combinar esto con Tailwind CSS, puedes diseñar interfaces atractivas y funcionales sin complicaciones. En esta entrada, te mostraré cómo crear componentes reutilizables en Astro usando Tailwind CSS.
+
+### ¿Por qué usar componentes reutilizables?
+
+1. **Consistencia**: Mantener un estilo uniforme en toda la aplicación.
+2. **Mantenibilidad**: Facilita las actualizaciones y el mantenimiento del código.
+3. **Productividad**: Acelera el proceso de desarrollo al reducir la duplicación de código.
+
+### Creando un Componente Básico
+
+Supongamos que queremos crear un botón reutilizable. Sigue estos pasos:
+
+#### 1. Crea el Archivo del Componente
+
+En tu proyecto de Astro, crea un nuevo archivo llamado `Button.astro` en la carpeta `src/components`.
+
+```astro
+---
+// Button.astro
+const { text, onClick, type = 'button' } = Astro.props;
 ---
 
-# Hola Mundo
-Hola perrrrossss!
+<button 
+  type={type} 
+  onClick={onClick} 
+  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
+  {text}
+</button>
+```
+
+#### 2. Usar el Componente en una Página
+
+Ahora que tienes tu componente `Button`, puedes utilizarlo en cualquier página de tu proyecto. Por ejemplo, en `src/pages/index.astro`:
+
+```astro
+---
+import Button from '../components/Button.astro';
+---
+
+<html>
+  <head>
+    <title>Mi Proyecto Astro</title>
+  </head>
+  <body class="p-8">
+    <h1 class="text-3xl font-bold mb-4">¡Bienvenido a mi sitio!</h1>
+    <Button text="Clic aquí" onClick={() => alert('¡Botón clicado!')} />
+  </body>
+</html>
+```
+
+### Personalizando Componentes
+
+Una de las grandes ventajas de los componentes en Astro es que puedes personalizarlos fácilmente. Por ejemplo, puedes añadir props adicionales para cambiar el color o el tamaño del botón:
+
+```astro
+---
+// Button.astro
+const { text, onClick, type = 'button', color = 'bg-blue-600' } = Astro.props;
+---
+
+<button 
+  type={type} 
+  onClick={onClick} 
+  class={`px-4 py-2 ${color} text-white rounded hover:${color.replace('bg-', 'hover:bg-')} focus:outline-none focus:ring-2 focus:ring-blue-500`}
+>
+  {text}
+</button>
+```
+
+Ahora, puedes pasar diferentes colores al botón al usarlo:
+
+```astro
+<Button text="Clic rojo" color="bg-red-600" onClick={() => alert('¡Botón rojo clicado!')} />
+<Button text="Clic verde" color="bg-green-600" onClick={() => alert('¡Botón verde clicado!')} />
+```
